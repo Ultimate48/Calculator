@@ -7,8 +7,14 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
 
   const handleClick = (e) => {
     e.preventDefault()
+    if (number === 'CE') {
+      setEquation('')
+      return
+    }
+    if (equation.length === 9){
+      return
+    }
     setEquation(equation + number)
-    console.log(equation)
   }
 
   const base = "border border-solid border-black rounded-md flex justify-center items-center text-[40px] font-[Orbitron]"
@@ -36,10 +42,18 @@ function NumberGroup(props) {
   )
 }
 
+function DisplayDefault(){
+  return (
+    <div className='text-gray-700/25'>888888888</div>
+  )
+}
+
 function Display(){
+
+  const { equation, setEquation } = useContext(EquationContext);
   return(
-    <div className='h-[100px] w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-[Orbitron] flex justify-center items-center text-gray-700/25'>
-        888888888
+    <div className='h-[100px] w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-[Orbitron] items-center pr-4'>
+      {equation || <DisplayDefault/>}
       </div>
   )
 }
@@ -60,14 +74,33 @@ function Operations(){
 }
 
 function EnterButton(){
+
+  const { equation, setEquation } = useContext(EquationContext);
+
+  const handleClick = (e) => {
+    e.preventDefault()
+
+    const finalEquation = equation.replace('x', '*').replace('÷', '/')
+    const result = eval(finalEquation)
+
+    //Only 9 digits are allowed
+    if (result.toString().length > 9) {
+      setEquation(result.toString().slice(0, 9))
+      return
+    }
+
+    setEquation(result)
+  }
+
   return(
-    <div className="h-full w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[20px] font-[Orbitron]">
+    <button className="h-full w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[20px] font-[Orbitron]"
+    onClick={(e) => handleClick(e)}>
       <div>E</div>
       <div>N</div>
       <div>T</div>
       <div>E</div>
       <div>R</div>
-    </div>
+    </button>
   )
 }
 
@@ -85,8 +118,9 @@ function OperatrionsAndZero(){
   return (
     <div className='h-full w-[284px] flex'>
       <div className='h-full w-[66%]'>
-        <div className='h-[88px] flex justify-around items-center p-3'>
-          <NumberButton width='full' number={0}/>
+        <div className='h-[88px] flex justify-between items-center p-3'>
+          <NumberButton number={0}/>
+          <NumberButton number='.'/>
         </div>
         <Operations />
       </div>
