@@ -8,6 +8,11 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
   const handleClick = (e) => {
     e.preventDefault()
 
+    if (number === '←') {
+      setEquation(equation.slice(0, -1))
+      return
+    }
+
     const opertors = ['+', '-', 'x', '÷']
 
     if (opertors.includes(number) && opertors.includes(equation[equation.length - 1])) {
@@ -141,11 +146,12 @@ function OperatrionsAndZero(){
         </div>
         <Operations />
       </div>
-      <div className='h-full w-[34%] p-3 flex flex-col justify-between'>
-        <div className='h-[88px] md:mb-[23px]'><NumberButton number={'CE'}/>
+      <div className='h-full w-[34%] p-3 flex flex-col md:gap-[23px]'>
+        <div className='h-[88px]'><NumberButton number={'CE'}/>
         </div>
-        <div className='h-[88px]'><EnterButton /></div>
-        <NumberButton number='='/>
+        <div className='h-[88px]'>
+        <NumberButton number='←'/></div>
+        <div className='h-[65px]'><EnterButton /></div>
       </div>
     </div>
   )
