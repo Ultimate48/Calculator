@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { EquationProvider, EquationContext } from './EquationContext';
+
 function NumberButton({width = '70px', height = '65px', number = 0}) {
 
   const { equation, setEquation, darkMode } = useContext(EquationContext);
@@ -231,4 +232,3 @@ export default function App() {
     </EquationProvider>
   )
 }
-
