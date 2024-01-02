@@ -35,7 +35,7 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
     setEquation(equation.toString() + number.toString())
   }
 
-  const base = "border border-solid rounded-md flex justify-center items-center text-[40px] font-[cursive]"
+  const base = "border border-solid rounded-md flex justify-center items-center text-[40px] font-normal"
 
   const colorStyle = darkMode ? 'text-white border-white' : 'text-black border-black'
 
@@ -66,7 +66,7 @@ function Display(){
 
   const { equation, setEquation, darkMode } = useContext(EquationContext);
 
-  const base = 'h-[85px] md:h-[100px] w-[280px] md:w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-[cursive] flex justify-end items-center pr-4'
+  const base = 'h-[85px] md:h-[100px] w-[280px] md:w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-normal flex justify-end items-center pr-4'
 
   const colorStyle = darkMode ? 'text-white border-white' : 'text-black border-black'
 
@@ -112,7 +112,7 @@ function EnterButton(){
     setEquation(result)
   }
 
-  const base = `h-[65px] w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[40px] font-[cursive] text-center justify-center`
+  const base = `h-[65px] w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[40px] font-normal text-center justify-center`
   
   const colorStyle = darkMode ? 'text-white border-white' : 'text-black border-black'
 
@@ -216,7 +216,7 @@ function CalculatorPage() {
     setDarkMode(!darkMode)
   }
 
-  const buttonStyle = 'h-[70px] w-[100px] border border-solid rounded-md font-[cursive] text-[20px] absolute top-0 right-0 m-4'
+  const buttonStyle = 'h-[70px] w-[100px] border border-solid rounded-md font-normal text-[20px] absolute top-0 right-0 m-4'
 
   const colorStyle = darkMode ? 'border-white text-white' : 'border-black text-black'
 
@@ -240,8 +240,10 @@ export default function App() {
 
   return (
     <EquationProvider>
-    
     <div>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+      </style>  
       <CalculatorPage />
     </div>
     </EquationProvider>
