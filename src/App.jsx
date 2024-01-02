@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { EquationProvider, EquationContext } from './EquationContext';
 
 function NumberButton({width = '70px', height = '65px', number = 0}) {
 
-  const handleClick = () => {
-    console.log(number)
+  const { equation, setEquation } = useContext(EquationContext);
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    setEquation(equation + number)
+    console.log(equation)
   }
 
   const base = "border border-solid border-black rounded-md flex justify-center items-center text-[40px] font-[Orbitron]"
@@ -13,8 +18,6 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
   const heightStyle = height === 'full' ? 'h-full' : `h-[${height}]`
 
   const style = `${base} ${widthStyle} ${heightStyle}`
-
-  console.log(style)
 
   return (
     <button className={style} onClick={(e) => handleClick(e)}>
@@ -110,20 +113,24 @@ function Caculator(){
     <div className='h-[400px] w-[600px] border border-solid border-black rounded-md flex justify-center items-center'>
       <div className='h-[390px] w-[590px] border border-solid border-black rounded-md'>
         <Display />
-        <TouchPad />
+        <TouchPad/>
       </div>
     </div>
   )
 }
 
 export default function App() {
+
   return (
+    <EquationProvider>
     
     <div className='h-screen flex justify-center items-center'>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
       </style>
-      <Caculator />
+      <Caculator/>
     </div>
+    </EquationProvider>
   )
 }
+
