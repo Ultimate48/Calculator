@@ -9,7 +9,7 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
     e.preventDefault()
 
     if (number === '←') {
-      setEquation(equation.slice(0, -1))
+      setEquation(equation.toString().slice(0, -1))
       return
     }
 
@@ -29,7 +29,7 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
       setEquation('')
       return
     }
-    if (equation.length === 12){
+    if (equation.length === 9){
       return
     }
     setEquation(equation.toString() + number.toString())
@@ -104,8 +104,8 @@ function EnterButton(){
     const result = eval(finalEquation)
 
     //Only 9 digits are allowed
-    if (result.toString().length > 12) {
-      setEquation(result.toString().slice(0, 12))
+    if (result.toString().length > 9) {
+      setEquation(result.toString().slice(0, 9))
       return
     }
 
