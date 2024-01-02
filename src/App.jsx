@@ -7,6 +7,19 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
 
   const handleClick = (e) => {
     e.preventDefault()
+
+    const opertors = ['+', '-', 'x', '÷']
+
+    if (opertors.includes(number) && opertors.includes(equation[equation.length - 1])) {
+      setEquation(equation.slice(0, -1) + number)
+      return
+    }
+
+    if(equation == 'Infinity' || equation == 'NaN'){
+      setEquation('' + number.toString())
+      return
+    }
+
     if (number === 'CE') {
       setEquation('')
       return
@@ -43,7 +56,6 @@ function NumberGroup(props) {
     </div>
   )
 }
-
 
 function Display(){
 
@@ -95,7 +107,7 @@ function EnterButton(){
     setEquation(result)
   }
 
-  const base = `h-full w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[20px] font-[cursive]`
+  const base = `h-[65px] w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[40px] font-[cursive] text-center justify-center`
   
   const colorStyle = darkMode ? 'text-white border-white' : 'text-black border-black'
 
@@ -104,11 +116,7 @@ function EnterButton(){
   return(
     <button className={style}
     onClick={(e) => handleClick(e)}>
-      <div>E</div>
-      <div>N</div>
-      <div>T</div>
-      <div>E</div>
-      <div>R</div>
+      =
     </button>
   )
 }
@@ -136,7 +144,8 @@ function OperatrionsAndZero(){
       <div className='h-full w-[34%] p-3 flex flex-col justify-between'>
         <div className='h-[88px] md:mb-[23px]'><NumberButton number={'CE'}/>
         </div>
-        <EnterButton />
+        <div className='h-[88px]'><EnterButton /></div>
+        <NumberButton number='='/>
       </div>
     </div>
   )
