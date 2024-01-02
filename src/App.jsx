@@ -11,13 +11,13 @@ function NumberButton({width = '70px', height = '65px', number = 0}) {
       setEquation('')
       return
     }
-    if (equation.length === 9){
+    if (equation.length === 12){
       return
     }
     setEquation(equation + number)
   }
 
-  const base = "border border-solid border-black rounded-md flex justify-center items-center text-[40px] font-[Orbitron]"
+  const base = "border border-solid border-black rounded-md flex justify-center items-center text-[40px] font-[cursive]"
 
   const widthStyle = width === 'full' ? 'w-full' : `w-[${width}]`
 
@@ -44,7 +44,7 @@ function NumberGroup(props) {
 
 function DisplayDefault(){
   return (
-    <div className='text-gray-700/25'>888888888</div>
+    <div className='text-gray-700/25'>888888888888</div>
   )
 }
 
@@ -52,7 +52,7 @@ function Display(){
 
   const { equation, setEquation } = useContext(EquationContext);
   return(
-    <div className='h-[100px] w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-[Orbitron] items-center pr-4'>
+    <div className='h-[100px] w-[560px] border border-solid border-black rounded-md mx-auto mt-2 text-right my-auto text-[70px] font-[cursive] items-center pr-4'>
       {equation || <DisplayDefault/>}
       </div>
   )
@@ -84,8 +84,8 @@ function EnterButton(){
     const result = eval(finalEquation)
 
     //Only 9 digits are allowed
-    if (result.toString().length > 9) {
-      setEquation(result.toString().slice(0, 9))
+    if (result.toString().length > 12) {
+      setEquation(result.toString().slice(0, 12))
       return
     }
 
@@ -93,7 +93,7 @@ function EnterButton(){
   }
 
   return(
-    <button className="h-full w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[20px] font-[Orbitron]"
+    <button className="h-full w-[70px] border border-solid border-black rounded-md flex flex-col items-center text-[20px] font-[cursive]"
     onClick={(e) => handleClick(e)}>
       <div>E</div>
       <div>N</div>
@@ -154,14 +154,10 @@ function Caculator(){
 }
 
 export default function App() {
-
   return (
     <EquationProvider>
     
-    <div className='h-screen flex justify-center items-center'>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-      </style>
+    <div className='h-screen flex flex-col justify-center items-center'>
       <Caculator/>
     </div>
     </EquationProvider>
